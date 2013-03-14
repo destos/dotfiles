@@ -1,29 +1,62 @@
 [user]
-  name = Ben Alman
-  email = EMAIL
+  name = Patrick Forringer
+  email = patrick@forringer.com
+# Use osx keychain for http credentials
+[credential]
+  helper = osxkeychain
 [core]
-  autocrlf = input
-  whitespace = fix,space-before-tab,tab-in-indent,trailing-space
+  autocrlf = false
+  savecrlf = true
+  whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+  editor = mate
+  quotepath = false
   excludesfile = ~/.gitignore_global
 [apply]
   whitespace = fix
 [alias]
-  br = branch
-  ci = commit
-  co = checkout
-  df = diff
+  # br = branch
+  # ci = commit
+  # co = checkout
+  # df = diff
   g = grep -I
-  lg = log -p
   pp = !"echo 'Pull'; git pull; echo 'Push'; git push"
-  rb = rbranch
+  # rb = rbranch
   rv = review
   st = status
+  st = status
+  ci = commit
+  ca = commit -a -m
+  cm = commit -m
+  br = branch -a
+  co = checkout
+  switch = checkout
+  df = difftool
+  lg = log -p
+  lol = log --graph --decorate --pretty=oneline --abbrev-commit
+  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  l50 = "!git log --abbrev-commit --date=short --pretty=format:'%x00%h%x00%cd%x00%s%x00%an%x00%d' | gawk -F '\\0' '{ printf \"%s\\033[31m%s\\033[0m \\033[32m%s\\033[0m %-50s \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, $3, gensub(/(.{49}).{2,}/, \"\\\\1…\",\"g\",$4), $5, $6 }' | less -R"
+  l80 = "!git log --abbrev-commit --date=short --pretty=format:'%x00%h%x00%cd%x00%s%x00%an%x00%d' | gawk -F '\\0' '{ printf \"%s\\033[31m%s\\033[0m \\033[32m%s\\033[0m %-80s \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, $3, gensub(/(.{79}).{2,}/, \"\\\\1…\",\"g\",$4), $5, $6 }' | less -R"
+  lg50 = "!git log --graph --color=always --abbrev-commit --date=relative --pretty=format:'%x00%h%x00%s%x00%cd%x00%an%x00%d' | gawk -F '\\0' '{ printf \"%s\\033[31m%s\\033[0m %-50s \\033[32m%14s\\033[0m \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, gensub(/(.{49}).{2,}/, \"\\\\1…\",\"g\",$3), $4, $5, $6 }' | less -R"
+  lg80 = "!git log --graph --color=always --abbrev-commit --date=relative --pretty=format:'%x00%h%x00%s%x00%cd%x00%an%x00%d' | gawk -F '\\0' '{ printf \"%s\\033[31m%s\\033[0m %-80s \\033[32m%14s\\033[0m \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, gensub(/(.{79}).{2,}/, \"\\\\1…\",\"g\",$3), $4, $5, $6 }' | less -R"
+  ls = ls-files
+  pick = cherry-pick
+  tags = tag -l
   ksdiff = difftool -y -t Kaleidoscope
+  nuke = reset --hard HEAD
+  unstage = reset HEAD
+  stage = add
+[branch]
+  autosetuprebase = always
+  autosetupmerge = always
 [branch "master"]
   remote = origin
   merge = refs/heads/master
+# Color settings
 [color]
-  ui = auto
+  branch = auto
+  diff = auto
+  status = auto
+  ui = true
 [color "branch"]
   current = yellow reverse
   local = yellow
@@ -33,14 +66,26 @@
   frag = magenta bold
   old = red bold
   new = green bold
+  whitespace = red reverse
 [color "status"]
   added = yellow
   changed = green
   untracked = cyan
-[merge]
-  log = true
+[rebase]
+  autosquash = true
+[push]
+  default = tracking
+[difftool]
+  prompt = false
 [difftool "Kaleidoscope"]
-  cmd = ksdiff-wrapper git \"$LOCAL\" \"$REMOTE\"
+	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[mergetool "Kaleidoscope"]
+	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+	trustExitCode = true
+[mergetool]
+	prompt = false
+[merge]
+	tool = Kaleidoscope
 [rerere]
   enabled = 1
 [url "git@github.com:"]
@@ -57,3 +102,6 @@
   insteadOf = "gist:"
 [url "git@heroku.com:"]
   insteadOf = "heroku:"
+# auto git protocol for my user
+[url "git@github.com:destos/"]
+  insteadOf = "git://github.com/destos/"
