@@ -1,0 +1,39 @@
+[ui]
+username = Pat Forringer <pforringer@consumeraffairs.com>
+editor = mate -w
+# merge = kdiff3
+merge = Kaleidoscope
+
+[merge-tools]
+# kdiff3.executable = kdiff3
+# kdiff3.args = $base $local $other -o $output
+# kdiff.priority = 1
+Kaleidoscope.executable = /usr/local/bin/ksdiff
+Kaleidoscope.args = --merge --output $output --base $base -- $local $other
+
+[extensions]
+hgext.bookmarks =
+hgext.fetch =
+hgext.graphlog = 
+mq =
+pager =
+color =
+hgshelve=~/.dotfiles/lib/hgshelve.py
+hgext.extdiff =
+
+[extdiff]
+cmd.ksdiff = /usr/local/bin/ksdiff
+opts.ksdiff = --changeset --wait --filelist
+
+[trusted]
+users = root, jgmize, jsatt, jwhitlock
+groups = www-data
+
+[pager]
+pager = LESS='FSRX' less
+
+[alias]
+# hs = hg status
+blame = annotate --user --number
+pushdd = push dev -b default
+lr = log -l 1 
