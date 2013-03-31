@@ -57,3 +57,6 @@ Desktop.ini
 
 # NPM
 .npmignore
+
+# Python
+*.pyc
