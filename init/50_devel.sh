@@ -2,7 +2,7 @@
 source ~/.dotfiles/source/50_devel.sh
 
 # Install Node.js.
- if [[ "$(type -P nave)" ]]; then
+ if [[ "$(which nave)" ]]; then
   nave_stable="$(nave stable)"
   if [[ "$(node --version 2>/dev/null)" != "v$nave_stable" ]]; then
     e_header "Installing Node.js $nave_stable"
@@ -19,7 +19,7 @@ fi
 source ~/.dotfiles/source/50_devel.sh
 
 # Install Npm modules.
-if [[ "$(type -P npm)" ]]; then
+if [[ "$(which npm)" ]]; then
   e_header "Updating Npm"
   npm update -g npm
 

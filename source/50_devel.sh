@@ -1,7 +1,7 @@
 export PATH
 
 # nave init.
-if [[ "$(type -P nave)" ]]; then
+if [[ "$(which nave)" ]]; then
   nave_default="$(nave ls | awk '/^default/ {print $2}')"
   if [[ "$nave_default" && "$(node --version 2>/dev/null)" != "v$nave_default" ]]; then
     node_path=~/.nave/installed/$nave_default/bin
@@ -89,3 +89,10 @@ function npm_latest() {
     echo -e '\nAll dependencies are @latest version.'
   fi
 }
+
+# python development
+if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
+  export WORKON_HOME=$HOME/.virtualenvs
+  source /usr/local/bin/virtualenvwrapper.sh
+  export PIP_RESPECT_VIRTUALENV=true
+fi

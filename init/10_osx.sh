@@ -9,17 +9,17 @@ if [[ ! -d "$('xcode-select' -print-path 2>/dev/null)" ]]; then
 fi
 
 # Install Homebrew.
-if [[ ! "$(type -P brew)" ]]; then
+if [[ ! "$(which brew)" ]]; then
   e_header "Installing Homebrew"
-  true | /usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.github.com/mxcl/homebrew/master/Library/Contributions/install_homebrew.rb)"
+  true | /usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
 fi
 
-if [[ "$(type -P brew)" ]]; then
+if [[ "$(which brew)" ]]; then
   e_header "Updating Homebrew"
   brew update
 
   # Install Homebrew recipes.
-  recipes=(git tree sl lesspipe id3tool nmap git-extras htop-osx man2html)
+  recipes=(git hg tree sl lesspipe id3tool nmap git-extras htop-osx man2html wget)
 
   list="$(to_install "${recipes[*]}" "$(brew list)")"
   if [[ "$list" ]]; then
@@ -27,7 +27,7 @@ if [[ "$(type -P brew)" ]]; then
     brew install $list
   fi
 
-  if [[ ! "$(type -P gcc-4.2)" ]]; then
+  if [[ ! "$(which gcc-4.2)" ]]; then
     e_header "Installing Homebrew dupe recipe: apple-gcc42"
     brew install https://raw.github.com/Homebrew/homebrew-dupes/master/apple-gcc42.rb
   fi

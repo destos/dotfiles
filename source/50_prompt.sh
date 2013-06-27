@@ -95,7 +95,7 @@ function prompt_command() {
   # Manually load z here, after $? is checked, to keep $? from being clobbered.
   [[ "$(type -t _z)" ]] && _z --add "$(pwd -P 2>/dev/null)" 2>/dev/null
 
-  # While the simple_prompt environment var is set, disable the awesome prompt.
+  # While the simple_prompt itenvironment var is set, disable the awesome prompt.
   [[ "$simple_prompt" ]] && PS1='\n$ ' && return
 
   prompt_getcolors

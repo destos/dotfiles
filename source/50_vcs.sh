@@ -55,7 +55,7 @@ function gra() {
 
 # git log with per-commit cmd-clickable GitHub URLs (iTerm)
 function gf() {
-  local remote="$(git remote -v | awk '/^origin.*\(push\)$/ {print $2}')"
+  local remote="$(git remote  -v | awk '/^origin.*\(push\)$/ {print $2}')"
   [[ "$remote" ]] || return
   local user_repo="$(echo "$remote" | perl -pe 's/.*://;s/\.git$//')"
   git log $* --name-status --color | awk "$(cat <<AWK
