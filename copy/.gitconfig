@@ -45,6 +45,26 @@
   nuke = reset --hard HEAD
   unstage = reset HEAD
   stage = add
+  # amend the last commit with the same message
+  amd = commit --amend --no-edit
+  # Fetch a specific pull request from a Github repository and check it out by pull request id
+  # >> git pr origin 123
+  pr = "!f() { git fetch -fu $1 refs/pull/$2/head:pr/$2; git checkout pr/$2; } ; f"
+  # Delete all branches created using above pr alias
+  prc = "!git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
+  # Lists all incoming or outgoing commits
+  # >> git incoming origin
+  outgoing = !git fetch && git log FETCH_HEAD..
+  incoming = !git fetch && git log ..FETCH_HEAD
+  # Delete all branches that have been pulled in to master
+  delete-merged-branches = "!f() { git checkout --quiet master && git branch --merged | grep --invert-match '\\*' | xargs -n 1 git branch --delete; git checkout --quiet @{-1}; }; f"
+  dmb = delete-merged-branches
+  ba = branch-age
+  bar = branch-age-remote
+  bav = branch-age-reversed
+  # Try out
+  # edit-unmerged = "!$EDITOR `git diff --name-only --diff-filter=U`"
+  # add-unmerged = "!git add `git diff --name-only --diff-filter=U`"
 [branch]
   autosetuprebase = always
   autosetupmerge = always
@@ -75,17 +95,6 @@
   autosquash = true
 [push]
   default = tracking
-[difftool]
-  prompt = false
-[difftool "Kaleidoscope"]
-	cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
-[mergetool "Kaleidoscope"]
-	cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
-	trustExitCode = true
-[mergetool]
-	prompt = false
-[merge]
-	tool = Kaleidoscope
 [rerere]
   enabled = 1
 [url "git@github.com:"]
@@ -105,3 +114,19 @@
 # auto git protocol for my user
 [url "git@github.com:destos/"]
   insteadOf = "git://github.com/destos/"
+[difftool "Kaleidoscope"]
+  cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[diff]
+  tool = Kaleidoscope
+[difftool]
+  prompt = false
+[mergetool "Kaleidoscope"]
+  cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+  trustexitcode = true
+[mergetool]
+  prompt = false
+[merge]
+  tool = Kaleidoscope
+[filter "media"]
+  clean = git-media-clean %f
+  smudge = git-media-smudge %f
