@@ -19,12 +19,19 @@ if [[ "$(which brew)" ]]; then
   brew update
 
   # Install Homebrew recipes.
-  recipes=(git hg tree sl lesspipe id3tool nmap git-extras htop-osx man2html wget)
+  recipes=(git tree sl lesspipe nmap git-extras htop-osx man2html wget caskroom/cask/brew-cask)
 
   list="$(to_install "${recipes[*]}" "$(brew list)")"
   if [[ "$list" ]]; then
     e_header "Installing Homebrew recipes: $list"
     brew install $list
+  fi
+
+  cask_apps=(launchrocket alfred asepsis qlstephen vagrant virtualbox google-chrome iterm2)
+  cask_list="$(to_install "${cask_apps[*]}" "$(brew cask list)")"
+  if [[ "$cask_list" ]]; then
+    e_header "Installing Applications via cask : $cask_list"
+    brew cask install $cask_list
   fi
 
   if [[ ! "$(which gcc-4.2)" ]]; then
