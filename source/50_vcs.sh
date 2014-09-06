@@ -40,7 +40,7 @@ function ged() {
   local n=${#files[@]}
   echo "Opening $n $([[ "$@" ]] || echo "modified ")file$([[ $n != 1 ]] && \
     echo s)${@:+ modified in }$@"
-  q "${files[@]}"
+  s "${files[@]}"
 }
 
 # add a github remote by github username
@@ -73,8 +73,8 @@ for n in {1..5}; do alias gf$n="gf -n $n"; done
 if [[ "$OSTYPE" =~ ^darwin ]]; then
   alias gdk='git ksdiff'
   alias gdkc='gdk --cached'
-  alias gt='gittower -s'
   if [[ ! "$SSH_TTY" ]]; then
     alias gd='gdk'
   fi
+  source /usr/local/etc/bash_completion.d/git-completion.bash
 fi
