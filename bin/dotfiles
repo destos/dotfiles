@@ -1,6 +1,7 @@
 #!/bin/bash
 
-echo 'Dotfiles - "Cowboy" Ben Alman - http://benalman.com/'
+echo 'Dotfiles - "Destos" Patrick Forringer - http://patrick.forringer.com/'
+echo 'Based off - Dotfiles - "Cowboy" Ben Alman - http://benalman.com/'
 
 if [[ "$1" == "-h" || "$1" == "--help" ]]; then cat <<HELP
 

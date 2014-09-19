@@ -1,0 +1,6 @@
+luarocks install mjolnir.application
+luarocks install mjolnir.window
+luarocks install mjolnir.hotkey
+luarocks install mjolnir.fnutils
+luarocks install mjolnir.alert
+luarocks install mjolnir.lb.spotify

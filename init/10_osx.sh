@@ -27,7 +27,7 @@ if [[ "$(which brew)" ]]; then
     brew install $list
   fi
 
-  cask_apps=(launchrocket alfred asepsis qlstephen vagrant virtualbox google-chrome iterm2 handbrake shortcat firefox steam onepassword vlc beamer seil mailbox witch)
+  cask_apps=(launchrocket alfred asepsis qlstephen vagrant virtualbox google-chrome iterm2 handbrake shortcat firefox steam onepassword vlc beamer seil mailbox witch mjolnir)
   cask_list="$(to_install "${cask_apps[*]}" "$(brew cask list)")"
   if [[ "$cask_list" ]]; then
     e_header "Installing Applications via cask : $cask_list"
@@ -39,3 +39,6 @@ if [[ "$(which brew)" ]]; then
     brew install https://raw.github.com/Homebrew/homebrew-dupes/master/apple-gcc42.rb
   fi
 fi
+
+# Disable press and hold accent menu
+defaults write -g ApplePressAndHoldEnabled -bool false
