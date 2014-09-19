@@ -90,9 +90,11 @@ function npm_latest() {
   fi
 }
 
-# python development
-if [ -f /usr/local/bin/virtualenvwrapper.sh ]; then
-  export WORKON_HOME=$HOME/.virtualenvs
-  source /usr/local/bin/virtualenvwrapper.sh
-  export PIP_RESPECT_VIRTUALENV=true
-fi
+# python env
+export PYENV_ROOT="$HOME/.pyenv"
+export PATH="$PYENV_ROOT/bin:$PATH"
+eval "$(pyenv init -)"
+# bootstrap virtual environment
+alias pyvirt="pyenv virtualenvwrapper"
+alias pyinstall="pyenv install"
+alias pyenvinit="pyinstall 2.7.8"
