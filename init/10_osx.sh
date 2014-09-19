@@ -11,7 +11,7 @@ fi
 # Install Homebrew.
 if [[ ! "$(which brew)" ]]; then
   e_header "Installing Homebrew"
-  true | /usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+  true | /usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
 fi
 
 if [[ "$(which brew)" ]]; then
@@ -19,7 +19,7 @@ if [[ "$(which brew)" ]]; then
   brew update
 
   # Install Homebrew recipes.
-  recipes=(git tree sl lesspipe nmap git-extras htop-osx man2html wget caskroom/cask/brew-cask)
+  recipes=(git tree sl lesspipe nmap git-extras htop-osx man2html wget caskroom/cask/brew-cask hub tmux)
 
   list="$(to_install "${recipes[*]}" "$(brew list)")"
   if [[ "$list" ]]; then

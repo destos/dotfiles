@@ -138,7 +138,7 @@ if [[ "$OSTYPE" =~ ^darwin ]]; then
   # It's easiest to get Git via Homebrew, so get that first.
   if [[ ! "$(which brew)" ]]; then
     e_header "Installing Homebrew"
-    true | /usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.github.com/mxcl/homebrew/go)"
+    true | /usr/bin/ruby -e "$(/usr/bin/curl -fsSL https://raw.githubusercontent.com/Homebrew/install/master/install)"
   fi
   # If Homebrew was installed, install Git.
   if [[ "$(which brew)" ]]; then
