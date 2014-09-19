@@ -27,7 +27,7 @@ if [[ "$(which brew)" ]]; then
     brew install $list
   fi
 
-  cask_apps=(launchrocket alfred asepsis qlstephen vagrant virtualbox google-chrome iterm2)
+  cask_apps=(launchrocket alfred asepsis qlstephen vagrant virtualbox google-chrome iterm2 handbrake shortcat firefox steam onepassword vlc beamer seil mailbox witch)
   cask_list="$(to_install "${cask_apps[*]}" "$(brew cask list)")"
   if [[ "$cask_list" ]]; then
     e_header "Installing Applications via cask : $cask_list"
