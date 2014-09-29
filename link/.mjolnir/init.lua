@@ -4,7 +4,20 @@ local window = require "mjolnir.window"
 local hotkey = require "mjolnir.hotkey"
 local fnutils = require "mjolnir.fnutils"
 local alert = require "mjolnir.alert"
+-- local grid = require "mjolnir.bg.grid"
 local grid = require "grid"
+
+--- The margin between each window horizontally.
+grid.MARGINX = 0
+
+--- The margin between each window vertically.
+grid.MARGINY = 0
+
+--- The number of cells high the grid is.
+grid.GRIDHEIGHT = 6
+
+--- The number of cells wide the grid is.
+grid.GRIDWIDTH = 6
 
 -- Music controls
 local spotify = require "mjolnir.lb.spotify"

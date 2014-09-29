@@ -1,8 +1,8 @@
---- === mjolnir.ds.grid ===
+--- === mjolnir.bg.grid ===
 ---
 --- Move/resize your windows along a virtual and horizontal grid.
 ---
---- Usage: local grid = require "mjolnir.ds.grid"
+--- Usage: local grid = require "mjolnir.bg.grid"
 ---
 --- The grid is an partition of your screen; by default it is 3x3, i.e. 3 cells wide by 3 cells tall.
 ---
@@ -21,22 +21,22 @@ local window = require "mjolnir.window"
 local alert = require "mjolnir.alert"
 
 
---- mjolnir.ds.grid.MARGINX = 0
+--- mjolnir.bg.grid.MARGINX = 5
 --- Variable
 --- The margin between each window horizontally.
-grid.MARGINX = 0
+grid.MARGINX = 5
 
---- mjolnir.ds.grid.MARGINY = 0
+--- mjolnir.bg.grid.MARGINY = 5
 --- Variable
 --- The margin between each window vertically.
-grid.MARGINY = 0
+grid.MARGINY = 5
 
---- mjolnir.ds.grid.GRIDHEIGHT = 3
+--- mjolnir.bg.grid.GRIDHEIGHT = 3
 --- Variable
 --- The number of cells high the grid is.
 grid.GRIDHEIGHT = 3
 
---- mjolnir.ds.grid.GRIDWIDTH = 3
+--- mjolnir.bg.grid.GRIDWIDTH = 3
 --- Variable
 --- The number of cells wide the grid is.
 grid.GRIDWIDTH = 3
@@ -46,7 +46,7 @@ local function round(num, idp)
   return math.floor(num * mult + 0.5) / mult
 end
 
---- mjolnir.ds.grid.get(win)
+--- mjolnir.bg.grid.get(win)
 --- Function
 --- Gets the cell this window is on
 function grid.get(win)
@@ -62,7 +62,7 @@ function grid.get(win)
   }
 end
 
---- mjolnir.ds.grid.set(win, grid, screen)
+--- mjolnir.bg.grid.set(win, grid, screen)
 --- Function
 --- Sets the cell this window should be on
 function grid.set(win, cell, screen)
@@ -84,7 +84,7 @@ function grid.set(win, cell, screen)
   win:setframe(newframe)
 end
 
---- mjolnir.ds.grid.snap(win)
+--- mjolnir.bg.grid.snap(win)
 --- Function
 --- Snaps the window into a cell
 function grid.snap(win)
@@ -93,7 +93,7 @@ function grid.snap(win)
   end
 end
 
---- mjolnir.ds.grid.adjustheight(by)
+--- mjolnir.bg.grid.adjustheight(by)
 --- Function
 --- Increases the grid by the given number of cells; may be negative
 function grid.adjustheight(by)
@@ -102,7 +102,7 @@ function grid.adjustheight(by)
   fnutils.map(window.visiblewindows(), ext.grid.snap)
 end
 
---- mjolnir.ds.grid.adjustwidth(by)
+--- mjolnir.bg.grid.adjustwidth(by)
 --- Function
 --- Widens the grid by the given number of cells; may be negative
 function grid.adjustwidth(by)
@@ -111,7 +111,7 @@ function grid.adjustwidth(by)
   fnutils.map(window.visiblewindows(), grid.snap)
 end
 
---- mjolnir.ds.grid.adjust_focused_window(fn)
+--- mjolnir.bg.grid.adjust_focused_window(fn)
 --- Function
 --- Passes the focused window's cell to fn and uses the result as its new cell.
 function grid.adjust_focused_window(fn)
@@ -121,7 +121,7 @@ function grid.adjust_focused_window(fn)
   grid.set(win, f, win:screen())
 end
 
---- mjolnir.ds.grid.maximize_window()
+--- mjolnir.bg.grid.maximize_window()
 --- Function
 --- Maximizes the focused window along the given cell.
 function grid.maximize_window()
@@ -130,7 +130,7 @@ function grid.maximize_window()
   grid.set(win, f, win:screen())
 end
 
---- mjolnir.ds.grid.pushwindow_nextscreen()
+--- mjolnir.bg.grid.pushwindow_nextscreen()
 --- Function
 --- Moves the focused window to the next screen, using its current cell on that screen.
 function grid.pushwindow_nextscreen()
@@ -138,7 +138,7 @@ function grid.pushwindow_nextscreen()
   grid.set(win, grid.get(win), win:screen():next())
 end
 
---- mjolnir.ds.grid.pushwindow_prevscreen()
+--- mjolnir.bg.grid.pushwindow_prevscreen()
 --- Function
 --- Moves the focused window to the previous screen, using its current cell on that screen.
 function grid.pushwindow_prevscreen()
@@ -146,56 +146,56 @@ function grid.pushwindow_prevscreen()
   grid.set(win, grid.get(win), win:screen():previous())
 end
 
---- mjolnir.ds.grid.pushwindow_left()
+--- mjolnir.bg.grid.pushwindow_left()
 --- Function
 --- Moves the focused window one cell to the left.
 function grid.pushwindow_left()
   grid.adjust_focused_window(function(f) f.x = math.max(f.x - 1, 0) end)
 end
 
---- mjolnir.ds.grid.pushwindow_right()
+--- mjolnir.bg.grid.pushwindow_right()
 --- Function
 --- Moves the focused window one cell to the right.
 function grid.pushwindow_right()
   grid.adjust_focused_window(function(f) f.x = math.min(f.x + 1, grid.GRIDWIDTH - f.w) end)
 end
 
---- mjolnir.ds.grid.resizewindow_wider()
+--- mjolnir.bg.grid.resizewindow_wider()
 --- Function
 --- Resizes the focused window's right side to be one cell wider.
 function grid.resizewindow_wider()
   grid.adjust_focused_window(function(f) f.w = math.min(f.w + 1, grid.GRIDWIDTH - f.x) end)
 end
 
---- mjolnir.ds.grid.resizewindow_thinner()
+--- mjolnir.bg.grid.resizewindow_thinner()
 --- Function
 --- Resizes the focused window's right side to be one cell thinner.
 function grid.resizewindow_thinner()
   grid.adjust_focused_window(function(f) f.w = math.max(f.w - 1, 1) end)
 end
 
---- mjolnir.ds.grid.pushwindow_down()
+--- mjolnir.bg.grid.pushwindow_down()
 --- Function
 --- Moves the focused window to the bottom half of the screen.
 function grid.pushwindow_down()
   grid.adjust_focused_window(function(f) f.y = math.min(f.y + 1, grid.GRIDHEIGHT - f.h) end)
 end
 
---- mjolnir.ds.grid.pushwindow_up()
+--- mjolnir.bg.grid.pushwindow_up()
 --- Function
 --- Moves the focused window to the top half of the screen.
 function grid.pushwindow_up()
   grid.adjust_focused_window(function(f) f.y = math.max(f.y - 1, 0) end)
 end
 
---- mjolnir.ds.grid.resizewindow_shorter()
+--- mjolnir.bg.grid.resizewindow_shorter()
 --- Function
 --- Resizes the focused window so its height is 1 grid count less.
 function grid.resizewindow_shorter()
   grid.adjust_focused_window(function(f) f.y = f.y - 0; f.h = math.max(f.h - 1, 1) end)
 end
 
---- mjolnir.ds.grid.resizewindow_taller()
+--- mjolnir.bg.grid.resizewindow_taller()
 --- Function
 --- Resizes the focused window so its height is 1 grid count higher.
 function grid.resizewindow_taller()
