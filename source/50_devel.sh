@@ -90,3 +90,6 @@ function npm_latest() {
   fi
 }
 
+alias syn="pyvirt && workon syn && export DJANGO_SETTINGS_MODULE=fla_manager.settings.local"
+alias toolhub="pyvirt && workon toolhub"
+alias brick="pyvirt && workon brick"
