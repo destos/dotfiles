@@ -19,7 +19,7 @@ if [[ "$(which brew)" ]]; then
   brew update
 
   # Install Homebrew recipes.
-  recipes=(git tree sl lesspipe nmap git-extras htop-osx man2html wget caskroom/cask/brew-cask hub tmux pyenv pyenv-virtualenvwrapper)
+  recipes=(git tree sl lesspipe nmap git-extras htop-osx man2html wget caskroom/cask/brew-cask hub tmux pyenv pyenv-virtualenvwrapper gawk)
 
   list="$(to_install "${recipes[*]}" "$(brew list)")"
   if [[ "$list" ]]; then
