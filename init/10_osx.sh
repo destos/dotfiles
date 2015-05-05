@@ -19,7 +19,7 @@ if [[ "$(which brew)" ]]; then
   brew update
 
   # Install Homebrew recipes.
-  recipes=(git tree sl lesspipe nmap git-extras htop-osx man2html wget caskroom/cask/brew-cask hub tmux pyenv pyenv-virtualenvwrapper gawk reattach-to-user-namespace)
+  recipes=(git tree sl lesspipe nmap git-extras htop-osx man2html wget caskroom/cask/brew-cask hub tmux pyenv pyenv-virtualenvwrapper gawk reattach-to-user-namespace autoenv)
 
   list="$(to_install "${recipes[*]}" "$(brew list)")"
   if [[ "$list" ]]; then
@@ -27,7 +27,7 @@ if [[ "$(which brew)" ]]; then
     brew install $list
   fi
 
-  cask_apps=(launchrocket alfred asepsis qlstephen vagrant virtualbox google-chrome iterm2 handbrake shortcat firefox steam onepassword vlc beamer seil mailbox witch mjolnir dash)
+  cask_apps=(launchrocket alfred asepsis qlstephen vagrant virtualbox google-chrome iterm2 handbrake shortcat firefox steam onepassword vlc beamer seil mailbox witch mjolnir dash totalfinder)
   cask_list="$(to_install "${cask_apps[*]}" "$(brew cask list)")"
   if [[ "$cask_list" ]]; then
     e_header "Installing Applications via cask : $cask_list"

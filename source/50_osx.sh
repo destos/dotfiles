@@ -75,3 +75,6 @@ eval "$(pyenv init -)"
 alias pyvirt="pyenv virtualenvwrapper"
 alias pyinstall="pyenv install"
 alias pyenvinit="pyinstall 2.7.8"
+
+# source auto env
+source $(brew --prefix autoenv)/activate.sh
