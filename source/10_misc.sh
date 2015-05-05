@@ -10,3 +10,7 @@ function path_remove() {
   # output the new array
   echo "${t[*]}"
 }
+
+if [[ "$(which thefuck)" ]]; then
+    alias fuck='$(thefuck $(fc -ln -1))'
+fi
