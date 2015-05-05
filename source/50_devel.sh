@@ -93,3 +93,14 @@ function npm_latest() {
 alias syn="pyvirt && workon syn && export DJANGO_SETTINGS_MODULE=fla_manager.settings.local"
 alias toolhub="pyvirt && workon toolhub"
 alias brick="pyvirt && workon brick"
+
+# Install and save pip package to requirements file specified
+function pips() {
+    package_name=$1
+    requirements_file=$2
+    if [[ -z $requirements_file ]]
+    then
+        requirements_file='./requirements.txt'
+    fi
+    pip install $package_name && pip freeze | grep -i $package_name >> $requirements_file
+}
