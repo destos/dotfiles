@@ -17,7 +17,7 @@ grid.MARGINY = 0
 grid.GRIDHEIGHT = 6
 
 --- The number of cells wide the grid is.
-grid.GRIDWIDTH = 6
+grid.GRIDWIDTH = 8
 
 -- Music controls
 local spotify = require "mjolnir.lb.spotify"
@@ -25,10 +25,6 @@ local spotify = require "mjolnir.lb.spotify"
 -- Set up hotkey combinations
 local mash = {"cmd", "alt", "ctrl"}
 local mashshift = {"cmd", "alt", "shift"}
-
--- Set grid size.
-grid.GRIDWIDTH  = 6
-grid.GRIDHEIGHT = 4
 
 -- local function opendictionary()
 --   alert.show("Lexicon, at your service.", 0.75)
