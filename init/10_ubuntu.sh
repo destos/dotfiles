@@ -44,7 +44,7 @@ packages=(
   htop
 )
 
-list=()
+list=(thefuck)
 for package in "${packages[@]}"; do
   if [[ ! "$(dpkg -l "$package" 2>/dev/null | grep "^ii  $package")" ]]; then
     list=("${list[@]}" "$package")

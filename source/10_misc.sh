@@ -12,5 +12,5 @@ function path_remove() {
 }
 
 if [[ "$(which thefuck)" ]]; then
-    alias fuck='$(thefuck $(fc -ln -1))'
+    alias fuck='eval $(thefuck $(fc -ln -1)); history -r'
 fi
