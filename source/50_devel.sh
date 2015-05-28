@@ -93,6 +93,10 @@ function npm_latest() {
 alias syn="pyvirt && workon syn && export DJANGO_SETTINGS_MODULE=fla_manager.settings.local"
 alias toolhub="pyvirt && workon toolhub"
 alias brick="pyvirt && workon brick"
+alias summit="pyvirt && workon summit"
+
+# Clear pyc files
+alias cpyc="find . -name '*.pyc' -exec rm -rf {} \;"
 
 # Install and save pip package to requirements file specified
 function pips() {
