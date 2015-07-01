@@ -15,7 +15,7 @@ if [[ ! "$(which brew)" ]]; then
 fi
 
 if [[ "$(which brew)" ]]; then
-  e_header "Updating Homebrew"
+  e_header "Updating Homebrew Cask Apps"
   brew update
 
   # Install Homebrew recipes.
