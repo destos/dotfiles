@@ -93,7 +93,7 @@ function npm_latest() {
 alias syn="pyvirt && workon syn && export DJANGO_SETTINGS_MODULE=fla_manager.settings.local"
 alias toolhub="pyvirt && workon toolhub"
 alias brick="pyvirt && workon brick"
-alias summit="pyvirt && workon summit"
+alias summit_init="pyvirt && workon summit"
 
 # Clear pyc files
 alias cpyc="find . -name '*.pyc' -exec rm -rf {} \;"
@@ -107,4 +107,29 @@ function pips() {
         requirements_file='./requirements.txt'
     fi
     pip install $package_name && pip freeze | grep -i $package_name >> $requirements_file
+}
+
+
+function summit() {
+  SESSION="summit"
+
+  tmux has-session -t $SESSION
+  if [ $? -eq 0 ]; then
+  echo "Session $SESSION already exists. Attaching."
+    sleep 1
+    tmux attach -t $SESSION
+    exit 0;
+  fi
+
+  tmux new-session -d -s $SESSION
+
+  tmux send-keys -t $SESSION:0 "summit_init && cd server && clear && python manage.py runserver_plus" C-m
+  tmux split-window -t $SESSION:0 -h -p 30
+  tmux send-keys -t $SESSION:0 "summit_init && cd client && clear && grunt snort" C-m
+  tmux split-window -t $SESSION:0 -v -p 50
+  tmux send-keys -t $SESSION:0 "summit_init && cd server && clear && py.test -f" C-m
+  tmux new-window -t $SESSION:1 -n 'shell'
+  tmux send-keys -t $SESSION:1 "summit_init && cd server && clear && python manage.py shell_plus" C-m
+
+  tmux attach -t $SESSION
 }
