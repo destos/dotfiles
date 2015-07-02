@@ -48,10 +48,6 @@
   # amend the last commit with the same message
   amd = commit --amend --no-edit
   # Fetch a specific pull request from a Github repository and check it out by pull request id
-  # >> git pr origin 123
-  pr = "!f() { git fetch -fu $1 refs/pull/$2/head:pr/$2; git checkout pr/$2; } ; f"
-  # Delete all branches created using above pr alias
-  prc = "!git for-each-ref refs/heads/pr/* --format='%(refname)' | while read ref ; do branch=${ref#refs/heads/} ; git branch -D $branch ; done"
   # Lists all incoming or outgoing commits
   # >> git incoming origin
   outgoing = !git fetch && git log FETCH_HEAD..
