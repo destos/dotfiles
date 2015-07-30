@@ -127,7 +127,7 @@ function summit() {
   tmux split-window -t $SESSION:0 -h -p 30
   tmux send-keys -t $SESSION:0 "summit_init && cd client && clear && grunt snort" C-m
   tmux split-window -t $SESSION:0 -v -p 50
-  tmux send-keys -t $SESSION:0 "summit_init && cd server && clear && py.test -f" C-m
+  tmux send-keys -t $SESSION:0 "summit_init && cd server && clear && DJANGO_SETTINGS_MODULE=test_settings python manage.py test" C-m
   tmux new-window -t $SESSION:1 -n 'shell'
   tmux send-keys -t $SESSION:1 "summit_init && cd server && clear && python manage.py shell_plus" C-m
 
