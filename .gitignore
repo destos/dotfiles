@@ -4,6 +4,8 @@ link/.ssh/authorized_keys
 link/.ssh/id_*
 link/.ssh/known_hosts
 link/.tmux/plugins
+link/.tmux/resurrect
 *LOCAL*
+
 
 *.pyc
