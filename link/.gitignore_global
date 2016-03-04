@@ -62,4 +62,4 @@ Desktop.ini
 *.pyc
 
 # atom-ctags
-.tags
+.tags*
