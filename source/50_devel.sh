@@ -109,7 +109,7 @@ function pips() {
     pip install $package_name && pip freeze | grep -i $package_name >> $requirements_file
 }
 
-
+# Don't forget to run autoenv_authorize_env with the full path to the .env file so it can be loaded properly
 function summit() {
   SESSION="summit"
 
@@ -123,13 +123,13 @@ function summit() {
 
   tmux new-session -d -s $SESSION
 
-  tmux send-keys -t $SESSION:0 "summit_init && cd server && clear && python manage.py runserver_plus" C-m
-  tmux split-window -t $SESSION:0 -h -p 30
-  tmux send-keys -t $SESSION:0 "summit_init && cd client && clear && grunt snort" C-m
-  tmux split-window -t $SESSION:0 -v -p 50
-  tmux send-keys -t $SESSION:0 "summit_init && cd server && clear && DJANGO_SETTINGS_MODULE=test_settings python manage.py test" C-m
+  tmux send-keys -t $SESSION:0 "summit_init && script/server" C-m
+  tmux split-window -t $SESSION:0 -h -p 80
+  tmux send-keys -t $SESSION:0 "summit_init && script/buildstatic watch" C-m
+  tmux split-window -t $SESSION:0 -v -p 80
+  tmux send-keys -t $SESSION:0 "summit_init && script/test" C-m
   tmux new-window -t $SESSION:1 -n 'shell'
-  tmux send-keys -t $SESSION:1 "summit_init && cd server && clear && python manage.py shell_plus" C-m
+  tmux send-keys -t $SESSION:1 "summit_init && script/console" C-m
 
   tmux attach -t $SESSION
 }
