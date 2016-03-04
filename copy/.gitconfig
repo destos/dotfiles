@@ -61,9 +61,9 @@
   # Try out
   # edit-unmerged = "!$EDITOR `git diff --name-only --diff-filter=U`"
   # add-unmerged = "!git add `git diff --name-only --diff-filter=U`"
-[branch]
-  autosetuprebase = always
-  autosetupmerge = always
+# [branch]
+#   autosetuprebase = always
+#   autosetupmerge = always
 [branch "master"]
   remote = origin
   merge = refs/heads/master
