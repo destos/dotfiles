@@ -90,11 +90,6 @@ function npm_latest() {
   fi
 }
 
-alias syn="pyvirt && workon syn && export DJANGO_SETTINGS_MODULE=fla_manager.settings.local"
-alias toolhub="pyvirt && workon toolhub"
-alias brick="pyvirt && workon brick"
-alias summit_init="pyvirt && workon summit"
-
 # Clear pyc files
 alias cpyc="find . -name '*.pyc' -exec rm -rf {} \;"
 
@@ -109,9 +104,14 @@ function pips() {
     pip install $package_name && pip freeze | grep -i $package_name >> $requirements_file
 }
 
+function pyvirt_init() {
+  pyvirt
+  workon "$1"
+}
+
 # Don't forget to run autoenv_authorize_env with the full path to the .env file so it can be loaded properly
-function summit() {
-  SESSION="summit"
+function sk() {
+  SESSION="sk"
 
   tmux has-session -t $SESSION
   if [ $? -eq 0 ]; then
@@ -123,13 +123,35 @@ function summit() {
 
   tmux new-session -d -s $SESSION
 
-  tmux send-keys -t $SESSION:0 "summit_init && script/server" C-m
-  tmux split-window -t $SESSION:0 -h -p 80
-  tmux send-keys -t $SESSION:0 "summit_init && script/buildstatic watch" C-m
-  tmux split-window -t $SESSION:0 -v -p 80
-  tmux send-keys -t $SESSION:0 "summit_init && script/test" C-m
+  tmux send-keys -t $SESSION:0 "pyvirt_init summit && script/server" C-m
+  tmux split-window -t $SESSION:0 -h -p 50
+  tmux send-keys -t $SESSION:0 "pyvirt_init summit && script/buildstatic watch" C-m
+  tmux split-window -t $SESSION:0 -v -p 50
+  tmux send-keys -t $SESSION:0 "pyvirt_init summit && script/test" C-m
   tmux new-window -t $SESSION:1 -n 'shell'
-  tmux send-keys -t $SESSION:1 "summit_init && script/console" C-m
+  tmux send-keys -t $SESSION:1 "pyvirt_init summit && script/console" C-m
+
+  tmux attach -t $SESSION
+}
+
+function sk-client() {
+  SESSION="sk-client"
+
+  tmux has-session -t $SESSION
+  if [ $? -eq 0 ]; then
+  echo "Session $SESSION already exists. Attaching."
+    sleep 1
+    tmux attach -t $SESSION
+    exit 0;
+  fi
+
+  tmux new-session -d -s $SESSION
+
+  tmux send-keys -t $SESSION:0 "pyvirt_init sk-client && script/test" C-m
+  tmux split-window -t $SESSION:0 -h -p 50
+  tmux send-keys -t $SESSION:0 "pyvirt_init sk-client" C-m
+  tmux new-window -t $SESSION:1 -n 'shell'
+  tmux send-keys -t $SESSION:1 "pyvirt_init sk-client" C-m
 
   tmux attach -t $SESSION
 }

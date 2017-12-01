@@ -67,14 +67,8 @@ function txt_sub_restore() {
   for cmd in "${cmds[@]}"; do /usr/libexec/PlistBuddy -c "$cmd" "$prefs"; done
 }
 
-# python env
-export PYENV_ROOT="$HOME/.pyenv"
-export PATH="$PYENV_ROOT/bin:$PATH"
-eval "$(pyenv init -)"
-# bootstrap virtual environment
-alias pyvirt="pyenv virtualenvwrapper"
-alias pyinstall="pyenv install"
-alias pyenvinit="pyinstall 2.7.8"
-
 # source auto env
 source $(brew --prefix autoenv)/activate.sh
+
+# brew sbin
+export PATH="/usr/local/sbin:$PATH"
