@@ -5,6 +5,10 @@ local hotkey = hs.hotkey
 local fnutils = hs.fnutils
 local alert = hs.alert
 local grid = hs.grid
+-- Music controls
+local spotify = hs.spotify
+
+require "slowq"    -- Avoid accidental cmd-Q
 
 function reloadConfig(files)
     doReload = false
@@ -20,20 +24,14 @@ end
 hs.pathwatcher.new(os.getenv("HOME") .. "/.hammerspoon/", reloadConfig):start()
 alert.show("Config loaded")
 
---- The margin between each window horizontally.
-grid.MARGINX = 0
-
---- The margin between each window vertically.
-grid.MARGINY = 0
+--- The margin between each window vertically and horizontally.
+grid.setMargins('10,10')
 
 --- The number of cells high the grid is.
 grid.GRIDHEIGHT = 6
 
 --- The number of cells wide the grid is.
 grid.GRIDWIDTH = 8
-
--- Music controls
--- local spotify = require "hs.lb.spotify"
 
 -- Set up hotkey combinations
 local mash = {"cmd", "alt", "ctrl"}
@@ -72,10 +70,46 @@ hotkey.bind(mash, 'O', grid.resizeWindowWider)
 hotkey.bind(mash, 'I', grid.resizeWindowThinner)
 hotkey.bind(mash, 'Y', grid.resizeWindowShorter)
 
--- hotkey.bind(mashshift, 'space', spotify.displayCurrentTrack)
--- hotkey.bind(mashshift, 'p', spotify.play)
--- hotkey.bind(mashshift, 'o', spotify.pause)
--- hotkey.bind(mashshift, 'n', spotify.next)
--- hotkey.bind(mashshift, 'i', spotify.previous)
+hotkey.bind(mash, '.', function()
+    local windows = hs.window.visibleWindows()
+    for i in pairs(windows) do
+        local window = windows[i]
+        grid.snap(window)
+    end
+end)
+
+-- -- Show and hide a stripe of Desktop {{{3
+-- hotkey.bind(mash, ',', function()
+--     local windows = hs.window.visibleWindows()
+--     local finished = false
+--     for i in pairs(windows) do
+--         local window = windows[i]
+--         local frame = window:frame()
+--         local desktop = hs.window.desktop():frame()
+--         if frame.x + frame.w > desktop.w - 120 and frame ~= desktop then
+--             frame.w = desktop.w - frame.x - 120
+--             alert.show(frame.w)
+--             window:setFrame(frame)
+--             finished = true
+--         end
+--     end
+--     if finished then return end
+--     for i in pairs(windows) do
+--         local window = windows[i]
+--         local frame = window:frame()
+--         local desktop = hs.window.desktop():frame()
+--         if frame.x + frame.w == desktop.w - 120 then
+--             frame.w = frame.w + 100
+--             window:setFrame(frame)
+--         end
+--     end
+-- end)
+
+-- Spotify
+
+hotkey.bind(mashshift, 'space', spotify.displayCurrentTrack)
+hotkey.bind(mashshift, 'p', spotify.playpause)
+hotkey.bind(mashshift, 'n', spotify.next)
+hotkey.bind(mashshift, 'i', spotify.previous)
 
 alert.show("hammerspoon, at your service.")
