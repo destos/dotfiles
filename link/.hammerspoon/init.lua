@@ -33,6 +33,9 @@ grid.GRIDHEIGHT = 6
 --- The number of cells wide the grid is.
 grid.GRIDWIDTH = 8
 
+local animationDuration = 0
+hs.window.animationDuration = animationDuration
+
 -- Set up hotkey combinations
 local mash = {"cmd", "alt", "ctrl"}
 local mashshift = {"cmd", "alt", "shift"}
