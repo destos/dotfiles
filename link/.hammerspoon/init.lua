@@ -33,7 +33,7 @@ grid.GRIDHEIGHT = 6
 --- The number of cells wide the grid is.
 grid.GRIDWIDTH = 8
 
-local animationDuration = 0
+local animationDuration = 0.1
 hs.window.animationDuration = animationDuration
 
 -- Set up hotkey combinations
