@@ -67,8 +67,7 @@ function txt_sub_restore() {
   for cmd in "${cmds[@]}"; do /usr/libexec/PlistBuddy -c "$cmd" "$prefs"; done
 }
 
-# source auto env
-source $(brew --prefix autoenv)/activate.sh
 
-# brew sbin
-export PATH="/usr/local/sbin:$PATH"
+if [ -f $(brew --prefix)/etc/bash_completion ]; then
+    source $(brew --prefix)/etc/bash_completion
+fi
