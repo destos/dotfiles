@@ -1,11 +1,13 @@
 # Ubuntu-only stuff. Abort if not Ubuntu.
-[[ "$(cat /etc/issue 2> /dev/null)" =~ Ubuntu ]] || return 1
+is_ubuntu || return 1
 
 # Package management
 alias update="sudo apt-get -qq update && sudo apt-get upgrade"
 alias install="sudo apt-get install"
 alias remove="sudo apt-get remove"
 alias search="apt-cache search"
+
+alias say=spd-say
 
 # Make 'less' more.
 [ -x /usr/bin/lesspipe ] && eval "$(SHELL=/bin/sh lesspipe)"
@@ -22,7 +24,7 @@ function node_ver() {
       eval 'for n in node-v*+([0-9]).+([0-9]).+([0-9]); do nodes=("${nodes[@]}" "${n#node-}"); done'
       [[ "$1" ]] && echo "Node.js version \"$1\" not found."
       echo "Valid versions are: ${nodes[*]}"
-      [[ "$(which node)" ]] && echo "Current version is: $(node --version)"
+      [[ "$(type -P node)" ]] && echo "Current version is: $(node --version)"
       exit 1
     fi
     cd "/usr/local/src/node-v$ver"

@@ -1,14 +1,14 @@
 [submodule "libs/ack"]
-	path = libs/ack
+	path = vendor/ack
 	url = git@github.com:petdance/ack.git
 [submodule "libs/git-extras"]
-	path = libs/git-extras
+	path = vendor/git-extras
 	url = git@github.com:visionmedia/git-extras.git
 [submodule "libs/z"]
-	path = libs/z
+	path = vendor/z
 	url = git@github.com:rupa/z.git
 [submodule "libs/nave"]
-	path = libs/nave
+	path = vendor/nave
 	url = git@github.com:isaacs/nave.git
 [submodule "link/.tmux/plugins/tpm"]
 	path = link/.tmux/plugins/tpm
