@@ -108,3 +108,17 @@ function txt_sub_restore() {
   )
   for cmd in "${cmds[@]}"; do /usr/libexec/PlistBuddy -c "$cmd" "$prefs"; done
 }
+
+# ASDF 
+. /usr/local/opt/asdf/asdf.sh
+
+HOMEBREW_PREFIX=$(brew --prefix)
+if type brew &>/dev/null; then
+  if [[ -r "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh" ]]; then
+    source "${HOMEBREW_PREFIX}/etc/profile.d/bash_completion.sh"
+  else
+    for COMPLETION in "${HOMEBREW_PREFIX}/etc/bash_completion.d/"*; do
+      [[ -r "$COMPLETION" ]] && source "$COMPLETION"
+    done
+  fi
+fi

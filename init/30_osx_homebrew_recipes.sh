@@ -38,6 +38,7 @@ recipes=(
 #   pyenv-virtualenvwrapper
   gawk
   autoenv
+  asdf
 )
 
 brew_install_recipes
