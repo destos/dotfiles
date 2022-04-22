@@ -1,0 +1,73 @@
+tap "homebrew/cask"
+tap "homebrew/cask-versions"
+
+# Automation/usability
+cask "hammerspoon"
+
+# Development
+brew "coreutils"
+brew "curl"
+brew "asdf"
+# cask "docker"
+cask "iterm2"
+cask "visual-studio-code"
+brew "tmux"
+# cask "vagrant"
+# cask "virtualbox"
+# cask "virtualbox-extension-pack"
+# brew "pyenv"
+# brew "cmake"
+
+# Media
+cask "vlc"
+cask "spotify"
+
+# Comms
+cask "signal"
+cask "slack"
+
+# CL utils
+brew "thefuck"
+
+# cask "appcleaner"
+# cask "coconutbattery"
+# cask "enpass"
+# cask "google-chrome"
+# cask "keka"
+# cask "moneymoney"
+# cask "portfolioperformance"
+# cask "gpg-suite"
+# cask "gas-mask"
+# cask "telegram"
+
+# tap "d12frosted/emacs-plus"
+# brew "emacs-plus", args: ["with-emacs-27-branch", "HEAD"]
+
+# brew "shellcheck"
+# brew "coreutils"
+# brew "fzf"
+# brew 'git'
+# brew "ripgrep"
+# brew "fd"
+# brew "editorconfig"
+# cask "adoptopenjdk8"
+# brew "clojure-lsp"
+# brew "git-delta"
+# brew "git-absorb"
+# brew "chezmoi"
+# brew "languagetool"
+
+# tap "schniz/tap"
+# brew "fnm"
+
+# Quicklook
+# cask 'qlcolorcode'
+# cask 'qlmarkdown'
+# cask 'qlstephen'
+# cask 'quicklook-csv'
+# cask 'quicklook-json'
+
+# # Fonts
+tap 'homebrew/cask-fonts'
+# cask "font-jetbrains-mono"
+cask "font-source-code-pro"

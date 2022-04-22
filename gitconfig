@@ -1,0 +1,133 @@
+[user]
+  name = Patrick Forringer
+  email = patrick@forringer.com
+# Use osx keychain for http credentials
+[credential]
+  helper = osxkeychain
+[core]
+  autocrlf = false
+  savecrlf = true
+  whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
+	editor = code --wait
+  quotepath = false
+  excludesfile = ~/.gitignore_global
+[apply]
+  whitespace = fix
+[alias]
+  # br = branch
+  # ci = commit
+  # co = checkout
+  # df = diff
+  g = grep -I
+  pp = !"echo 'Pull'; git pull; echo 'Push'; git push"
+  # rb = rbranch
+  rv = review
+  st = status
+  st = status
+  ci = commit
+  ca = commit -a -m
+  cm = commit -m
+  br = branch -a
+  co = checkout
+  switch = checkout
+  df = difftool
+  lg = log -p
+  lol = log --graph --decorate --pretty=oneline --abbrev-commit
+  lola = log --graph --decorate --pretty=oneline --abbrev-commit --all
+  l50 = "!git log --abbrev-commit --date=short --pretty=format:'%x00%h%x00%cd%x00%s%x00%an%x00%d' | gawk -F '\\0' '{ printf \"%s\\033[31m%s\\033[0m \\033[32m%s\\033[0m %-50s \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, $3, gensub(/(.{49}).{2,}/, \"\\\\1…\",\"g\",$4), $5, $6 }' | less -R"
+  l80 = "!git log --abbrev-commit --date=short --pretty=format:'%x00%h%x00%cd%x00%s%x00%an%x00%d' | gawk -F '\\0' '{ printf \"%s\\033[31m%s\\033[0m \\033[32m%s\\033[0m %-80s \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, $3, gensub(/(.{79}).{2,}/, \"\\\\1…\",\"g\",$4), $5, $6 }' | less -R"
+  lg50 = "!git log --graph --color=always --abbrev-commit --date=relative --pretty=format:'%x00%h%x00%s%x00%cd%x00%an%x00%d' | gawk -F '\\0' '{ printf \"%s\\033[31m%s\\033[0m %-50s \\033[32m%14s\\033[0m \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, gensub(/(.{49}).{2,}/, \"\\\\1…\",\"g\",$3), $4, $5, $6 }' | less -R"
+  lg80 = "!git log --graph --color=always --abbrev-commit --date=relative --pretty=format:'%x00%h%x00%s%x00%cd%x00%an%x00%d' | gawk -F '\\0' '{ printf \"%s\\033[31m%s\\033[0m %-80s \\033[32m%14s\\033[0m \\033[30;1m%s\\033[0m\\033[33m%s\\n\", $1, $2, gensub(/(.{79}).{2,}/, \"\\\\1…\",\"g\",$3), $4, $5, $6 }' | less -R"
+  ls = ls-files
+  pick = cherry-pick
+  tags = tag -l
+  ksdiff = difftool -y -t Kaleidoscope
+  nuke = reset --hard HEAD
+  unstage = reset HEAD
+  stage = add
+  # amend the last commit with the same message
+  amd = commit --amend --no-edit
+  # Fetch a specific pull request from a Github repository and check it out by pull request id
+  # Lists all incoming or outgoing commits
+  # >> git incoming origin
+  outgoing = !git fetch && git log FETCH_HEAD..
+  incoming = !git fetch && git log ..FETCH_HEAD
+  # Delete all branches that have been pulled in to master
+  delete-merged-branches = "!f() { git checkout --quiet master && git branch --merged | grep --invert-match '\\*' | xargs -n 1 git branch --delete; git checkout --quiet @{-1}; }; f"
+  dmb = delete-merged-branches
+  ba = branch-age
+  bar = branch-age-remote
+  bav = branch-age-reversed
+  # Try out
+  # edit-unmerged = "!$EDITOR `git diff --name-only --diff-filter=U`"
+  # add-unmerged = "!git add `git diff --name-only --diff-filter=U`"
+# [branch]
+#   autosetuprebase = always
+#   autosetupmerge = always
+[branch "master"]
+  remote = origin
+  merge = refs/heads/master
+# Color settings
+[color]
+  branch = auto
+  diff = auto
+  status = auto
+  ui = true
+[color "branch"]
+  current = yellow reverse
+  local = yellow
+  remote = green
+[color "diff"]
+  meta = yellow bold
+  frag = magenta bold
+  old = red bold
+  new = green bold
+  whitespace = red reverse
+[color "status"]
+  added = yellow
+  changed = green
+  untracked = cyan
+[rebase]
+  autosquash = true
+[push]
+  default = tracking
+[rerere]
+  enabled = 1
+[url "git@github.com:"]
+  insteadOf = "gh:"
+  pushInsteadOf = "github:"
+  pushInsteadOf = "git://github.com/"
+[url "git://github.com/"]
+  insteadOf = "github:"
+[url "git@gist.github.com:"]
+  insteadOf = "gst:"
+  pushInsteadOf = "gist:"
+  pushInsteadOf = "git://gist.github.com/"
+[url "git://gist.github.com/"]
+  insteadOf = "gist:"
+# auto git protocol for my user
+[url "git@github.com:destos/"]
+  insteadOf = "git://github.com/destos/"
+[difftool "Kaleidoscope"]
+  cmd = ksdiff --partial-changeset --relative-path \"$MERGED\" -- \"$LOCAL\" \"$REMOTE\"
+[diff]
+  tool = Kaleidoscope
+[difftool]
+  prompt = false
+[mergetool "Kaleidoscope"]
+  cmd = ksdiff --merge --output \"$MERGED\" --base \"$BASE\" -- \"$LOCAL\" --snapshot \"$REMOTE\" --snapshot
+  trustexitcode = true
+[mergetool]
+  prompt = false
+[merge]
+  tool = Kaleidoscope
+[filter "media"]
+  clean = git-media-clean %f
+  smudge = git-media-smudge %f
+[filter "lfs"]
+	clean = git-lfs clean -- %f
+	smudge = git-lfs smudge -- %f
+	process = git-lfs filter-process
+	required = true
+[init]
+	defaultBranch = main
