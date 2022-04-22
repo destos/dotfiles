@@ -17,9 +17,6 @@
     ~/.gitconfig: 
     ~/.zshrc: 
     ~/.zprofile: 
-    ~/.autoenv:
-      path: libs/autoenv 
-      relink: true
 
 # - create:
 #     - ~/downloads
