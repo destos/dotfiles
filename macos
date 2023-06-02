@@ -923,3 +923,6 @@ echo "Done. Note that some of these changes require a logout/restart to take eff
 # 2020-08-19 17:17:27.501 defaults[81609:328793] Could not write domain /.Spotlight-V100/VolumeConfiguration; exiting
 # disablelocal: Unrecognized verb.
 # Done. Note that some of these changes require a logout/restart to take effect.
+
+# VSCode key repeat annoyance
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false

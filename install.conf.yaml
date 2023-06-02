@@ -17,13 +17,17 @@
     ~/.gitconfig: 
     ~/.zshrc: 
     ~/.zprofile: 
+    ~/.finicky.js: 
 
 # - create:
 #     - ~/downloads
 #     - ~/.vim/undo-history
 
 - shell:
+  # TODO: check and install zsh if not found
+  - [chsh -s $(which zsh), Making zsh the default shell]
   - [git submodule update --init --recursive, Installing submodules]
+  # TODO: don't run brew bundle install if not on darwin or brew not found
   - [brew bundle install -v --file ./brew/Brewfile, Installing brew items]
   # - [./.dotfiles/macos, Setting MacOS defaults]
 
