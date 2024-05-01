@@ -1,14 +1,15 @@
 [user]
   name = Patrick Forringer
-  email = patrick@forringer.com
+  email = destos@users.noreply.github.com
 # Use osx keychain for http credentials
 [credential]
   helper = osxkeychain
+  helper = /usr/local/share/gcm-core/git-credential-manager
 [core]
   autocrlf = false
   savecrlf = true
   whitespace = fix,-indent-with-non-tab,trailing-space,cr-at-eol
-	editor = code --wait
+  editor = code --wait
   quotepath = false
   excludesfile = ~/.gitignore_global
 [apply]
@@ -53,7 +54,7 @@
   outgoing = !git fetch && git log FETCH_HEAD..
   incoming = !git fetch && git log ..FETCH_HEAD
   # Delete all branches that have been pulled in to master
-  delete-merged-branches = "!f() { git checkout --quiet master && git branch --merged | grep --invert-match '\\*' | xargs -n 1 git branch --delete; git checkout --quiet @{-1}; }; f"
+  delete-merged-branches = "!f() { git checkout --quiet main && git branch --merged | grep --invert-match '\\*' | xargs -n 1 git branch --delete; git checkout --quiet @{-1}; }; f"
   dmb = delete-merged-branches
   ba = branch-age
   bar = branch-age-remote
@@ -64,9 +65,9 @@
 # [branch]
 #   autosetuprebase = always
 #   autosetupmerge = always
-[branch "master"]
+[branch "main"]
   remote = origin
-  merge = refs/heads/master
+  merge = refs/heads/main
 # Color settings
 [color]
   branch = auto
@@ -125,9 +126,11 @@
   clean = git-media-clean %f
   smudge = git-media-smudge %f
 [filter "lfs"]
-	clean = git-lfs clean -- %f
-	smudge = git-lfs smudge -- %f
-	process = git-lfs filter-process
-	required = true
+  clean = git-lfs clean -- %f
+  smudge = git-lfs smudge -- %f
+  process = git-lfs filter-process
+  required = true
 [init]
-	defaultBranch = main
+  defaultBranch = main
+[credential "https://dev.azure.com"]
+  useHttpPath = true

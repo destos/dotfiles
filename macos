@@ -886,6 +886,13 @@ defaults write org.m0k.transmission BlocklistAutoUpdate -bool true
 defaults write org.m0k.transmission RandomPort -bool true
 
 ###############################################################################
+# Vscode.app                                                                  #
+###############################################################################
+
+# VSCode key-repeat
+defaults write com.microsoft.VSCode ApplePressAndHoldEnabled -bool false
+
+###############################################################################
 # Kill affected applications                                                  #
 ###############################################################################
 

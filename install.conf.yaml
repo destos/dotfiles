@@ -3,29 +3,28 @@
       create: true
       relink: true
 
-- clean: ['~']
+- clean: ["~"]
 
 - link:
     ~/.bin:
-    ~/.tmux.conf: 
-    ~/.tmux: 
+    ~/.tmux.conf:
+    ~/.tmux:
     ~/.hammerspoon:
-      if: '[ `uname` = Darwin ]'
+      if: "[ `uname` = Darwin ]"
       path: hammerspoon
     ~/.oh-my-zsh:
-    ~/.gitignore_global: 
-    ~/.gitconfig: 
-    ~/.zshrc: 
-    ~/.zprofile: 
+    ~/.gitignore_global:
+    ~/.gitconfig:
+    ~/.zshrc:
+    ~/.zprofile:
+    ~/.finicky.js:
 
 # - create:
 #     - ~/downloads
 #     - ~/.vim/undo-history
-
 - shell:
-  - [git submodule update --init --recursive, Installing submodules]
-  - [brew bundle install -v --file ./brew/Brewfile, Installing brew items]
+    - [git submodule update --init --recursive, Installing submodules]
+    - [brew bundle install -v --file ./brew/Brewfile, Installing brew items]
   # - [./.dotfiles/macos, Setting MacOS defaults]
-
 # TODO: completion loading?
 # /usr/local/etc/bash_completion.d

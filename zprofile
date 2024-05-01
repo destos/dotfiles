@@ -13,6 +13,7 @@ if type brew &>/dev/null; then
   autoload -Uz compinit
 
   # ASDF
-  . $(brew --prefix asdf)/asdf.sh
-  # . /usr/local/opt/asdf/libexec/asdf.sh
+  . $(brew --prefix asdf)/libexec/asdf.sh
 fi
+
+eval "$(/opt/homebrew/bin/brew shellenv)"

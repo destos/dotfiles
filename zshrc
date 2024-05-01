@@ -48,7 +48,8 @@ export LS_COLORS='no=00:fi=00:di=01;34:ln=01;36:pi=40;33:so=01;35:do=01;35:bd=40
 # alias show="defaults write com.apple.finder AppleShowAllFiles -bool true && killall Finder"
 # alias hide="defaults write com.apple.finder AppleShowAllFiles -bool false && killall Finder"
 
-plugins=(thefuck git git-extras vscode iterm2 brew macos tmux git-flow wd poetry autoenv docker docker-compose pat-git-aliases)
+plugins=(thefuck git git-extras vscode iterm2 brew macos tmux git-flow wd poetry autoenv docker docker-compose aws)
+# pat-git-aliases
 
 source $ZSH/oh-my-zsh.sh
 
@@ -76,3 +77,5 @@ else
 fi
 unset __conda_setup
 # <<< conda initialize <<<
+
+. /opt/homebrew/opt/asdf/libexec/asdf.sh

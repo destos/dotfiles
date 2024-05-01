@@ -1,8 +1,10 @@
 tap "homebrew/cask"
 tap "homebrew/cask-versions"
+tap microsoft/git
 
 # Automation/usability
 cask "hammerspoon"
+brew "finicky"
 
 # Development
 brew "coreutils"
@@ -12,11 +14,15 @@ brew "asdf"
 cask "iterm2"
 cask "visual-studio-code"
 brew "tmux"
+brew "gh"
 # cask "vagrant"
 # cask "virtualbox"
 # cask "virtualbox-extension-pack"
-# brew "pyenv"
-# brew "cmake"
+brew "cmake"
+brew "pipx"
+cask git-credential-manager-core
+tap heroku/brew
+brew heroku
 
 # Media
 cask "vlc"
